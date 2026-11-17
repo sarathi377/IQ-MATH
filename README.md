@@ -15,10 +15,9 @@ BrainBloom is a responsive, browser-based collection of quick games designed for
 
 ## 🚀 Get started
 
-1. Download and extract the project ZIP.
-2. Open the `middle_school_mind_games` folder.
-3. Double-click `index.html` to launch it in Chrome, Edge, or Firefox.
-4. Pick a game and start playing!
+1. Open the `IQ-MATH` repo.
+2. Double-click `index.html` to launch it in Chrome, Edge, or Firefox.
+3. Pick a game and start playing!
 
 > No setup or server required. The games run right in your browser.
 
