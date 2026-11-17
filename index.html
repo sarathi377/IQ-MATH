@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BrainBloom | Middle School Mind Games</title>
+<style>
+:root{--ink:#17233b;--muted:#66728a;--purple:#6c5ce7;--pink:#ff7aa2;--mint:#baf2df;--yellow:#ffe28a;--blue:#dce8ff;--paper:#f7f8fc;--white:#fff;--shadow:0 12px 32px #25345b12}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-rounded,"Segoe UI",Arial,sans-serif}
+header{background:#fff;border-bottom:1px solid #e9ecf4;position:sticky;top:0;z-index:5}.nav{max-width:1120px;margin:auto;padding:15px 22px;display:flex;align-items:center;justify-content:space-between;gap:15px}.brand{font-size:1.35rem;font-weight:900;letter-spacing:-.7px}.brand span{color:var(--purple)}.nav small{color:var(--muted);font-weight:600}
+main{max-width:1120px;margin:auto;padding:28px 22px 60px}.hero{background:linear-gradient(120deg,#e7e2ff,#e4f8f1 65%,#fff1d0);border-radius:28px;padding:34px;display:grid;grid-template-columns:1.5fr .8fr;align-items:center;gap:20px;box-shadow:var(--shadow)}
+.eyebrow{font-size:.76rem;font-weight:900;text-transform:uppercase;letter-spacing:1.5px;color:#6253d4}.hero h1{font-size:clamp(2rem,5vw,3.5rem);line-height:1.04;letter-spacing:-2px;margin:10px 0}.hero p{color:#536078;max-width:560px;line-height:1.6}.hero-art{font-size:7rem;text-align:center;filter:drop-shadow(0 12px 10px #5142a522)}button{border:0;border-radius:14px;padding:12px 17px;background:var(--purple);color:white;font-weight:800;cursor:pointer;transition:.18s}button:hover{transform:translateY(-2px);filter:brightness(1.06)}button.secondary{background:#eeeaff;color:#5546ca}button.light{background:white;color:var(--ink);border:1px solid #e6e9f2}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0 30px}.stat{background:#fff;border:1px solid #edf0f6;border-radius:18px;padding:16px;box-shadow:var(--shadow)}.stat strong{display:block;font-size:1.55rem}.stat span{color:var(--muted);font-size:.86rem}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:28px 0 14px}.section-head h2{margin:0;font-size:1.5rem}.section-head p{margin:5px 0 0;color:var(--muted)}
+.games{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.game{background:#fff;border:1px solid #edf0f6;border-radius:21px;padding:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;min-height:205px}.game .emoji{width:54px;height:54px;border-radius:17px;display:grid;place-items:center;font-size:1.8rem;margin-bottom:12px}.game h3{margin:0 0 7px}.game p{color:var(--muted);font-size:.91rem;line-height:1.45;margin:0 0 15px;flex:1}.tag{font-size:.72rem;font-weight:800;color:#6253d4;background:#f0edff;padding:5px 9px;border-radius:99px;align-self:flex-start;margin-bottom:9px}
+.panel{display:none;background:white;border:1px solid #e9ecf4;border-radius:22px;padding:22px;margin-top:22px;box-shadow:var(--shadow)}.panel.active{display:block}.panel-top{display:flex;align-items:center;justify-content:space-between;gap:12px}.panel h2{margin:0}.muted{color:var(--muted)}.game-area{background:#f8f9ff;border-radius:18px;padding:20px;margin-top:16px;text-align:center}.memory-grid{display:grid;grid-template-columns:repeat(4,minmax(52px,76px));justify-content:center;gap:9px;margin:18px auto}.memory-card{height:70px;border-radius:14px;background:#dedaff;color:#5143bd;font-size:1.7rem;display:grid;place-items:center;font-weight:900;cursor:pointer}.memory-card.revealed,.memory-card.matched{background:#d9f7eb;color:#176c50}.memory-card.matched{opacity:.55;cursor:default}
+.answer-row{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;margin-top:18px}.answer-row button{min-width:75px}.question{font-size:1.5rem;font-weight:900;margin:15px}.feedback{min-height:28px;font-weight:800;margin-top:12px}.good{color:#17845e}.bad{color:#d34c69}.progress{height:9px;background:#eceef5;border-radius:99px;overflow:hidden;margin:14px 0}.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#6c5ce7,#ff7aa2);transition:width .25s}
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:26px}
+@media(max-width:760px){.hero{grid-template-columns:1fr;padding:25px}.hero-art{display:none}.games{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.games{grid-template-columns:1fr}.stats{gap:8px}.stat{padding:12px}.stat strong{font-size:1.25rem}.nav small{display:none}.section-head{align-items:start;flex-direction:column}}
+</style>
+</head>
+<body>
+<header><div class="nav"><div class="brand">🌱 Brain<span>Bloom</span></div><small>PLAY • THINK • GROW</small><button class="light" onclick="resetProgress()">Reset progress</button></div></header>
+<main>
+<section class="hero">
+ <div><div class="eyebrow">Your brain's playground</div><h1>Big ideas start<br>with little challenges.</h1><p>Take a fun brain break! Explore puzzles, train your memory, and sharpen your problem-solving skills—one game at a time.</p><button onclick="document.getElementById('games-title').scrollIntoView({behavior:'smooth'})">Explore games ↓</button></div>
+ <div class="hero-art">🧠✨</div>
+</section>
+<section class="stats">
+ <div class="stat"><strong id="points">0</strong><span>⭐ Total points</span></div>
+ <div class="stat"><strong id="played">0</strong><span>🎮 Games played</span></div>
+ <div class="stat"><strong id="streak">0</strong><span>🏅 Correct answers</span></div>
+</section>
+<div class="section-head" id="games-title"><div><h2>Choose your challenge</h2><p>Pick a game and see what your brain can do.</p></div></div>
+<section class="games">
+ <article class="game"><div class="emoji" style="background:#eeeaff">🃏</div><span class="tag">MEMORY</span><h3>Memory Match</h3><p>Flip cards and find all matching pairs. Remember where each picture is hiding.</p><button onclick="startMemory()">Play game</button></article>
+ <article class="game"><div class="emoji" style="background:#fff0d2">➗</div><span class="tag">MATH</span><h3>Math Sprint</h3><p>Solve quick number questions. Choose the right answer before the next challenge.</p><button onclick="startMath()">Play game</button></article>
+ <article class="game"><div class="emoji" style="background:#e1f7ee">🔷</div><span class="tag">LOGIC</span><h3>Pattern Detective</h3><p>Find the missing number in a sequence. Look carefully for the hidden rule.</p><button onclick="startPattern()">Play game</button></article>
+ <article class="game"><div class="emoji" style="background:#ffe8ef">🔢</div><span class="tag">NUMBER SKILLS</span><h3>Number Ninja</h3><p>Use number sense to spot the odd one out and make smart choices.</p><button onclick="startNinja()">Play game</button></article>
+ <article class="game"><div class="emoji" style="background:#e5efff">🧩</div><span class="tag">BRAIN TEASER</span><h3>Riddle Room</h3><p>Think sideways and solve a short riddle. There may be more than one way to think!</p><button onclick="startRiddle()">Play game</button></article>
+ <article class="game"><div class="emoji" style="background:#f4e9ff">⚡</div><span class="tag">QUICK THINKING</span><h3>Speed Round</h3><p>Answer as many simple questions as you can in 30 seconds.</p><button onclick="startSpeed()">Play game</button></article>
+</section>
+<section class="panel" id="panel">
+ <div class="panel-top"><div><div class="eyebrow" id="game-label">CHALLENGE</div><h2 id="game-title">Game</h2></div><button class="light" onclick="closeGame()">✕ Close</button></div>
+ <div class="progress"><span id="bar"></span></div>
+ <div class="game-area" id="game-area"></div>
+</section>
+</main>
+<footer>BrainBloom Demo • Made for curious minds in Classes 6–8 • Keep learning, keep blooming 🌼</footer>
+<script>
+let score=Number(localStorage.bbScore||0), played=Number(localStorage.bbPlayed||0), correct=Number(localStorage.bbCorrect||0);
+function updateStats(){document.getElementById('points').textContent=score;document.getElementById('played').textContent=played;document.getElementById('streak').textContent=correct;localStorage.bbScore=score;localStorage.bbPlayed=played;localStorage.bbCorrect=correct}
+function award(ok){played++;if(ok){score+=10;correct++}updateStats()}
+function showPanel(label,title,html){document.getElementById('game-label').textContent=label;document.getElementById('game-title').textContent=title;document.getElementById('game-area').innerHTML=html;document.getElementById('panel').classList.add('active');document.getElementById('panel').scrollIntoView({behavior:'smooth',block:'start'});document.getElementById('bar').style.width='0%'}
+function closeGame(){document.getElementById('panel').classList.remove('active')}
+function resetProgress(){if(confirm('Reset all BrainBloom scores on this device?')){score=played=correct=0;updateStats()}}
+const emojis=['🐸','🚀','🍉','⭐','🐼','🎈','🦋','🍕'];let deck=[],first=null,lock=false,matches=0;
+function startMemory(){deck=[...emojis.slice(0,6),...emojis.slice(0,6)].sort(()=>Math.random()-.5);first=null;lock=false;matches=0;drawMemory()}
+function drawMemory(){showPanel('MEMORY','Memory Match',`<p class="muted">Find all 6 matching pairs. Tap two cards to flip them.</p><div class="memory-grid">${deck.map((e,i)=>`<button class="memory-card" id="m${i}" onclick="flipCard(${i})">?</button>`).join('')}</div><div class="feedback" id="memmsg">Pairs found: 0 / 6</div><button class="secondary" onclick="startMemory()">Restart</button>`)}
+function flipCard(i){if(lock||document.getElementById('m'+i).classList.contains('matched')||document.getElementById('m'+i).classList.contains('revealed'))return;let el=document.getElementById('m'+i);el.textContent=deck[i];el.classList.add('revealed');if(first===null){first=i;return}lock=true;let a=first;first=null;if(deck[a]===deck[i]){[a,i].forEach(k=>{let x=document.getElementById('m'+k);x.classList.add('matched');x.classList.remove('revealed')});matches++;document.getElementById('memmsg').textContent=`Great memory! Pairs found: ${matches} / 6`;award(true);lock=false;if(matches===6)document.getElementById('memmsg').textContent='🎉 Amazing! You found every pair. +60 points earned!'}else{setTimeout(()=>{[a,i].forEach(k=>{let x=document.getElementById('m'+k);x.textContent='?';x.classList.remove('revealed')});lock=false},800)}}
+let qIndex=0;
+function quiz(title,label,questions){qIndex=0;showPanel(label,title,'');renderQ(questions,title,label)}
+function renderQ(qs,title,label){if(qIndex>=qs.length){document.getElementById('game-area').innerHTML=`<h2>Challenge complete! 🎉</h2><p>You finished ${qs.length} questions.</p><button onclick="closeGame()">Back to games</button>`;document.getElementById('bar').style.width='100%';return}let q=qs[qIndex];document.getElementById('bar').style.width=(qIndex/qs.length*100)+'%';document.getElementById('game-area').innerHTML=`<p class="muted">Question ${qIndex+1} of ${qs.length}</p><div class="question">${q.q}</div><div class="answer-row">${q.a.map(v=>`<button class="secondary" onclick="answerQuiz(${JSON.stringify(String(v))},${JSON.stringify(String(q.correct))},${JSON.stringify(title)},${JSON.stringify(label)},${JSON.stringify(qs)})">${v}</button>`).join('')}</div><div class="feedback" id="feedback"></div>`}
+function answerQuiz(v,c,title,label,qs){let f=document.getElementById('feedback');let ok=v===c;f.textContent=ok?'Correct! +10 points ⭐':'Not quite—keep trying!';f.className='feedback '+(ok?'good':'bad');award(ok);document.querySelectorAll('.answer-row button').forEach(b=>b.disabled=true);setTimeout(()=>{qIndex++;renderQ(qs,title,label)},850)}
+function startMath(){quiz('Math Sprint','MATH',[{q:'What is 8 × 7?',a:[54,56,64],correct:56},{q:'What is 125 ÷ 5?',a:[20,25,30],correct:25},{q:'What is ¾ of 20?',a:[10,15,18],correct:15},{q:'A triangle has how many sides?',a:[3,4,5],correct:3},{q:'What is 19 + 26?',a:[43,45,47],correct:45}])}
+function startPattern(){quiz('Pattern Detective','LOGIC',[{q:'2, 4, 6, 8, __',a:[9,10,12],correct:10},{q:'3, 6, 12, 24, __',a:[36,42,48],correct:48},{q:'1, 4, 9, 16, __',a:[20,24,25],correct:25},{q:'A, C, E, G, __',a:['H','I','J'],correct:'I'},{q:'20, 18, 15, 11, __',a:[8,7,6],correct:6}])}
+function startNinja(){quiz('Number Ninja','NUMBER SKILLS',[{q:'Which number is odd?',a:[12,18,21],correct:21},{q:'Which is the largest?',a:[0.7,0.07,0.77],correct:0.77},{q:'Which number is prime?',a:[21,23,27],correct:23},{q:'What is the smallest 3-digit number?',a:[99,100,101],correct:100},{q:'Which is a multiple of 9?',a:[42,54,62],correct:54}])}
+function startRiddle(){quiz('Riddle Room','BRAIN TEASER',[{q:'I have hands but cannot clap. What am I?',a:['A clock','A tree','A book'],correct:'A clock'},{q:'What gets wetter as it dries?',a:['A towel','The sun','A sponge'],correct:'A towel'},{q:'What has a face and two hands but no arms or legs?',a:['A clock','A doll','A robot'],correct:'A clock'}])}
+let speedTimer=null,speedLeft=30,speedQ=0;
+function startSpeed(){clearInterval(speedTimer);speedLeft=30;speedQ=0;showPanel('QUICK THINKING','Speed Round',`<h2 id="timer">30 seconds</h2><p class="muted">Answer as many as you can!</p><div class="question" id="speedq"></div><div class="answer-row" id="speeda"></div><div class="feedback" id="speedmsg"></div>`);nextSpeed();speedTimer=setInterval(()=>{speedLeft--;let t=document.getElementById('timer');if(t)t.textContent=speedLeft+' seconds';if(speedLeft<=0){clearInterval(speedTimer);document.getElementById('game-area').innerHTML=`<h2>Time's up! ⏱️</h2><p>You answered ${speedQ} questions. Great effort!</p><button onclick="startSpeed()">Try again</button>`}},1000)}
+function nextSpeed(){let a=Math.floor(Math.random()*12)+2,b=Math.floor(Math.random()*10)+1,ans=a+b;document.getElementById('speedq').textContent=`${a} + ${b} = ?`;document.getElementById('speeda').innerHTML=[ans,ans+2,ans-1].sort(()=>Math.random()-.5).map(x=>`<button class="secondary" onclick="speedAnswer(${x},${ans})">${x}</button>`).join('')}
+function speedAnswer(v,c){let ok=v===c;award(ok);if(ok)speedQ++;document.getElementById('speedmsg').textContent=ok?'Correct! Keep going!':'Good try—next one!';nextSpeed()}
+updateStats();
+</script>
+</body>
+</html>
